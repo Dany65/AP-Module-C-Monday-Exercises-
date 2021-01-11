@@ -28,15 +28,49 @@ double read_input_double()
     return input;
 }
 
+char scale_selector(){
+  char choice; //declare and initialise an integer type variable
+
+  cout << "Selec a scale by pressing M for meters and F for feet:" << endl;
+  cin >> choice;
+
+  while (cin.fail() || ((choice != 'M' && choice != 'm') && (choice != 'F' && choice != 'f'))){  // checks that the input is a char and that it is c or  in either lower or upper case
+  cout << "Wrong input. Press either `M` or `F`" << endl;
+
+  // clear error flags
+  cin.clear(); 
+  // Wrong input remains on the stream, so you need to get rid of it
+  cin.ignore(numeric_limits<streamsize>::max(),'\n');
+  cin >> choice;
+  }
+  return toupper(choice);
+}
+
 int main() {
-  cout << "What is the length of the room in feet?" << endl;
+  char scale = scale_selector();
+  string scale_name;
+  if (scale == 'M'){
+    scale_name = "meters";
+  } else {
+    scale_name = "feet";
+  }
+  cout << "What is the length of the room in " << scale_name << "?" << endl;
   double length = read_input_double(); //reads inputted length using function
-  cout << "What is the width of the room in feet?" << endl;
+  cout << "What is the width of the room in " << scale_name << "?" << endl;
   double width = read_input_double();
   cout << "Your room’s dimension is " << length << " by " << width << " feet, the area is:" << endl;
-  const double feet_to_meters = 0.3048;
-  double area_in_feet = length * width;
-  double area_in_metric = area_in_feet * feet_to_meters; // converts feet to meters
-  cout << area_in_feet << " square foot" << endl;
-  cout << area_in_metric << " square meters" << endl;
+ 
+  double area = length * width;
+  cout << area << " square " << scale_name << endl;
+
+  const double feet_to_meters_multiplier = 0.3048;
+  double converted_area;
+  if (scale == 'M'){
+    converted_area = area / feet_to_meters_multiplier; 
+    cout << converted_area << " square feet" << endl;
+  } else{
+    converted_area = area * feet_to_meters_multiplier; 
+    cout << converted_area << " square feet" << endl;
+
+  }
 }
