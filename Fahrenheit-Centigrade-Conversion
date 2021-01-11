@@ -36,7 +36,7 @@ char scale_selector(){
   cout << "Press `F` to convert from Centigrade to Fahrenheit." << endl;
   cin >> choice;
 
-  while (cin.fail() || ((choice != 'C' || choice != 'c') && (choice != 'C' || choice != 'c'))){  // checks that the input is a char and that it is c or  in either lower or upper case
+  while (cin.fail() || ((choice != 'C' || choice != 'c') && (choice != 'F' || choice != 'f'))){  // checks that the input is a char and that it is c or  in either lower or upper case
   cout << "Wrong input. Press either `C` or `F`" << endl;
 
   // clear error flags
