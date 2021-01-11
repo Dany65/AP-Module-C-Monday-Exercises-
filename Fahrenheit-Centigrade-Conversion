@@ -1,0 +1,64 @@
+//https://repl.it/@dany65/Fahrenheit-Centigrade-Conversion#main.cpp
+#include <iostream>
+#include<limits>
+
+using namespace std;
+
+
+double read_input_double()
+{
+    double input;
+    bool valid = false;
+    while(! valid){ // repeat as long as the input is not valid
+        cout << "Please enter the starting temperature: " ;
+        cin >> input;
+        if(cin.fail())
+        {
+            cout << "Wrong input" << endl;
+
+            // clear error flags
+            cin.clear(); 
+            // Wrong input remains on the stream, so you need to get rid of it
+             cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        }
+        else 
+        {
+            valid = true;
+        }
+    }
+    return input;
+}
+
+char scale_selector(){
+  char choice = -1; //declare and initialise an integer type variable
+
+  cout << "Press `C` to convert from Fahrenheit to Centigrade." << endl;
+  cout << "Press `F` to convert from Centigrade to Fahrenheit." << endl;
+
+  while (cin.fail() || (choice != 'C' && choice != 'F')){
+  cout << "Wrong input. Press either `C` or `F`" << endl;
+
+  // clear error flags
+  cin.clear(); 
+  // Wrong input remains on the stream, so you need to get rid of it
+  cin.ignore(numeric_limits<streamsize>::max(),'\n');
+  cin >> choice;
+  }
+  return choice;
+}
+
+int main() {
+  double temperature = read_input_double();
+	char choice =  scale_selector();
+  double result;
+  if (choice == 'C'){
+    result = (temperature - 32) * 5 / 9;
+    cout << "Your choice: C" << endl;
+    cout << temperature << " degrees Fahrenheit is " << result << " Centigrade";
+  } else {
+    result = (temperature * 9 /5) +32;
+    cout << "Your choice: C" << endl;
+    cout << temperature << " degrees Centigrade is " << result << " Fahrenheit";
+
+  }
+}
