@@ -30,12 +30,13 @@ double read_input_double()
 }
 
 char scale_selector(){
-  char choice = -1; //declare and initialise an integer type variable
+  char choice; //declare and initialise an integer type variable
 
   cout << "Press `C` to convert from Fahrenheit to Centigrade." << endl;
   cout << "Press `F` to convert from Centigrade to Fahrenheit." << endl;
+  cin >> choice;
 
-  while (cin.fail() || (choice != 'C' && choice != 'F')){
+  while (cin.fail() || ((choice != 'C' || choice != 'c') && (choice != 'C' || choice != 'c'))){  // checks that the input is a char and that it is c or  in either lower or upper case
   cout << "Wrong input. Press either `C` or `F`" << endl;
 
   // clear error flags
